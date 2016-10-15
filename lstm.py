@@ -18,7 +18,8 @@ X, Y, char_idx = \
 
 g = tflearn.input_data(shape=[None, maxlen, len(char_idx)])
 g = tflearn.lstm(g, 512, return_seq=True)
-converging on identitcal positions
+
+# converging on identitcal positions
 g = tflearn.dropout(g, 0.5)
 g = tflearn.lstm(g, 512)
 g = tflearn.dropout(g, 0.5)
@@ -31,7 +32,7 @@ m = tflearn.SequenceGenerator(g, dictionary=char_idx,
                               clip_gradients=5.0,
                               checkpoint_path='model_us_cities')
 
-$training
+# training
 for i in range(40):
     seed = random_sequence_from_textfile(path, maxlen)
     m.fit(X, Y, validation_set=0.1, batch_size=128,
